@@ -1,12 +1,8 @@
+
 var fs = require('fs');
 var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
-var express = require('express');
-var app = express();
-app.get('/begin',function(req,res){
-
-
 
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
@@ -16,7 +12,7 @@ var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
 var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
 
 // Load client secrets from a local file.
-fs.readFile('secret.json', function processClientSecrets(err, content) {
+fs.readFile('client_secret.json', function processClientSecrets(err, content) {
   if (err) {
     console.log('Error loading client secret file: ' + err);
     return;
@@ -64,8 +60,7 @@ function getNewToken(oauth2Client, callback) {
     access_type: 'offline',
     scope: SCOPES
   });
-  res.send('Authorize this app by visiting this url: ', authUrl);
-  res.redirect(authUrl);
+  console.log('Authorize this app by visiting this url: ', authUrl);
   var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -100,26 +95,19 @@ function storeToken(token) {
   fs.writeFile(TOKEN_PATH, JSON.stringify(token));
   console.log('Token stored to ' + TOKEN_PATH);
 }
-});
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
+
 /**
  * Lists the next 10 events on the user's primary calendar.
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
- var max = "2011-06-03T10:00:00-07:00"
- var min = "2011-06-03T10:00:00-07:00"
 function listEvents(auth) {
   var calendar = google.calendar('v3');
   calendar.events.list({
     auth: auth,
     calendarId: 'primary',
-    // timeMin: (new Date()).toISOString(),
-    // timeMax: max,
-    // timeMin: min,
-    maxResults: 1500,
+    timeMin: (new Date()).toISOString(),
+    maxResults: 10,
     singleEvents: true,
     orderBy: 'startTime'
   }, function(err, response) {
@@ -131,7 +119,7 @@ function listEvents(auth) {
     if (events.length == 0) {
       console.log('No upcoming events found.');
     } else {
-      console.log('Upcoming time events:');
+      console.log('Upcoming 10 events:');
       for (var i = 0; i < events.length; i++) {
         var event = events[i];
         var start = event.start.dateTime || event.start.date;

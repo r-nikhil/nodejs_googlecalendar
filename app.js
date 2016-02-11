@@ -1,6 +1,5 @@
 var google = require('googleapis-plus');
-var CLIENT_ID = "926674633237-fm3otcie0sc7nsnj0s2tv4c1ue0f2c4g.apps.googleusercontent.com"
-var CLIENT_SECRET = "yYEJZKAFXrG5fj4o8qHCLC_E"
+
 var REDIRECT_URL = "http://localhost"
 var event = {
   'summary': 'Google I/O 2015',
