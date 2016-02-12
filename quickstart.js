@@ -4,10 +4,8 @@ var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 var express = require('express');
 var app = express();
-app.get('/begin',function(req,res){
 
-
-
+app.get('/',function(req,res){
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
 var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
@@ -55,8 +53,8 @@ function authorize(credentials, callback) {
  * Get and store new token after prompting for user authorization, and then
  * execute the given callback with the authorized OAuth2 client.
  *
- * @param {google.auth.OAuth2} oauth2Client The OAuth2 client to get token for.
- * @param {getEventsCallback} callback The callback to call with the authorized
+ @param {google.auth.OAuth2} oauth2Client The OAuth2 client to get token for.
+ 
  *     client.
  */
 function getNewToken(oauth2Client, callback) {
@@ -65,7 +63,7 @@ function getNewToken(oauth2Client, callback) {
     scope: SCOPES
   });
   res.send('Authorize this app by visiting this url: ', authUrl);
-  res.redirect(authUrl);
+  
   var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -82,7 +80,9 @@ function getNewToken(oauth2Client, callback) {
       callback(oauth2Client);
     });
   });
+res.redirect(301,authUrl);
 }
+  
 
 /**
  * Store token to disk be used in later program executions.
@@ -100,7 +100,11 @@ function storeToken(token) {
   fs.writeFile(TOKEN_PATH, JSON.stringify(token));
   console.log('Token stored to ' + TOKEN_PATH);
 }
+
 });
+
+
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
