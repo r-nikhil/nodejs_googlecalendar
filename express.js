@@ -1,10 +1,13 @@
-var express = require('express');
-var app = express();
+var google = require('googleapis');
+var urlshortener = google.urlshortener('v1');
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+var params = { shortUrl: 'http://goo.gl/xKbRu3' };
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+// get the long url of a shortened url
+urlshortener.url.get(params, function (err, response) {
+  if (err) {
+    console.log('Encountered error', err);
+  } else {
+    console.log('Long url is', response.longUrl);
+  }
 });
