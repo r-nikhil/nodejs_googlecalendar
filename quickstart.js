@@ -9,8 +9,8 @@ app.get('/',function(req,res){
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
 var redirect_url = "http://localhost:3000/allevents"
-var client_id = "434189594778-vl4ep6g5j0naqrg914j4d1uerogha8ms.apps.googleusercontent.com"
-var client_secret = "6KXIBt7LW8g0kua5qEuzgcDU"
+var client_id = ""
+var client_secret = ""
 var oauth2Client = new OAuth2(client_id, client_secretm, redirect_url);
 
 // generate a url that asks permissions for Google+ and Google Calendar scopes
