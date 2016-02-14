@@ -11,9 +11,7 @@ var routes = require('./routes/index');
 var calenderplugin = require('./apps/calenderPlugin');
 
 var app = express();
-var clientId = '434189594778-vl4ep6g5j0naqrg914j4d1uerogha8ms.apps.googleusercontent.com';
-var clientSecret = '6KXIBt7LW8g0kua5qEuzgcDU';
-var scopes = 'https://www.googleapis.com/auth/calendar';
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
