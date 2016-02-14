@@ -6,8 +6,8 @@ var OAuth2 = google.auth.OAuth2;
 // var auth = new googleAuth();
 var urls = require('url')
 var redirect_url = "http://localhost:3000/all"
-var client_id = "521694941079-0ejb07oln59cha748p1atv69029bs4q8.apps.googleusercontent.com"
-var client_secret = "C2TJAse90baRiLVJ1IzMyApM"
+var client_id = ""
+var client_secret = ""
 var oauth2Client = new OAuth2(client_id, client_secret, redirect_url);
 google.options({ auth:oauth2Client});
 
